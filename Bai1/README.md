@@ -11,3 +11,4 @@ Phía Backend
 # <!-- Phía Frontend -->
 # code thuần dùng live server để chạy
 <img src="https://drive.google.com/file/d/1yk-bEjOg5Ed5q_sfaCa7KsJWjqz9rxcF/view?usp=sharing" alt="..." width="250" />
+![alt](http://drive.google.com/file/d/1yk-bEjOg5Ed5q_sfaCa7KsJWjqz9rxcF/view?usp=sharing)

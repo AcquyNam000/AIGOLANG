@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Gọi Groq API với Golang</h1>
-    <textarea id="prompt" rows="5" cols="50" placeholder="Nhập prompt..."></textarea><br>
-    <button id="sendButton">Gửi</button>
-    <div id="response"></div>
-
-    <script src="script.js"></script> <!-- ✅ Đảm bảo script.js được tải đúng -->
+    <div class="chat-container">
+        <h2>Chat với AI</h2>
+        <div class="chat-box" id="chatBox"></div>
+        <div class="input-container">
+            <input type="text" id="prompt" placeholder="Nhập câu hỏi của bạn...">
+            <button id="sendButton">Gửi đi</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,44 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
     const sendButton = document.getElementById("sendButton");
-    if (sendButton) {
-        sendButton.addEventListener("click", sendPrompt);
-    } else {
-        console.error("❌ Không tìm thấy nút gửi!");
-    }
+    sendButton.addEventListener("click", sendPrompt);
 });
 
 async function sendPrompt() {
-    const prompt = document.getElementById("prompt").value;
-    const responseDiv = document.getElementById("response");
+    const promptInput = document.getElementById("prompt");
+    const chatBox = document.getElementById("chatBox");
+    const userMessage = promptInput.value.trim();
 
-    if (!prompt.trim()) {
-        responseDiv.innerHTML = "<p style='color:red'>❌ Vui lòng nhập prompt!</p>";
-        return;
-    }
+    if (userMessage === "") return;
 
-    responseDiv.innerHTML = "⏳ Đang xử lý...";
+    // Hiển thị câu hỏi của User
+    chatBox.innerHTML += `<div class="user-message">${userMessage}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
 
+    // Gửi API
     try {
-        console.log("🔍 Gửi request đến API...");
-
-        const response = await fetch("http://localhost:8080/api/groq", {  // ✅ Đảm bảo đường dẫn API chính xác
-            method: "POST",  // ✅ Đúng method POST
-            mode: "cors",  // ✅ Cho phép gửi request CORS
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({ prompt }) // ✅ Gửi đúng JSON format
+        const response = await fetch("http://localhost:8080/api/groq", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: userMessage })
         });
 
-        if (!response.ok) {
-            throw new Error(`Lỗi HTTP: ${response.status}`);
-        }
-
         const data = await response.json();
-        responseDiv.innerHTML = `<strong>Phản hồi:</strong> <br> ${data.response}`;
+        const botMessage = data.response || "❌ Lỗi API!";
+
+        // Hiển thị phản hồi từ Bot
+        chatBox.innerHTML += `<div class="bot-message">${botMessage}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
     } catch (error) {
-        console.error("❌ Lỗi khi gọi API:", error);
-        responseDiv.innerHTML = "<p style='color:red'>❌ Không thể kết nối API!</p>";
+        console.error("❌ Lỗi API:", error);
+        chatBox.innerHTML += `<div class="bot-message">Lỗi khi gửi yêu cầu!</div>`;
     }
+
+    promptInput.value = ""; // Xóa ô nhập sau khi gửi
 }

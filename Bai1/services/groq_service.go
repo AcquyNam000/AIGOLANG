@@ -10,7 +10,7 @@ import (
 )
 
 // API Key viết trực tiếp (KHÔNG cần dùng .env nữa)
-const apiKey = "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"
+const apiKey = "key_groq_cua_ban"
 
 // ✅ Đúng URL API Groq
 const groqAPIURL = "https://api.groq.com/openai/v1/chat/completions"

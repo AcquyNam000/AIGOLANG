@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2, h3 {
+    text-align: center;
+}
+
+.voice-selection {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 600px;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Chat Box */
+.chat-box {
+    width: 100%;
+    max-width: 600px;
+    height: 350px;
+    overflow-y: auto;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tin nhắn */
+.chat-message {
+    max-width: 75%;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 15px;
+}
+
+/* Tin nhắn A (bên trái) */
+.chat-a {
+    align-self: flex-start;
+    background: #e3f2fd;
+    color: #000;
+    border-radius: 18px 18px 18px 5px;
+}
+
+/* Tin nhắn B (bên phải) */
+.chat-b {
+    align-self: flex-end;
+    background: #dcf8c6;
+    color: #000;
+    border-radius: 18px 18px 5px 18px;
+}
+
+/* Nút chỉnh sửa */
+.chat-message button {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* Khung SSML */
+.ssml-box {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 180px;
+    overflow-y: auto;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    white-space: pre-wrap;
+}
+
+/* Nút copy SSML */
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #007bff;
+}
+
+.copy-btn:hover {
+    color: #0056b3;
+}

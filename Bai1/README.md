@@ -10,4 +10,4 @@ Phía Backend
 # run BE go run cmd/main.go *****
 # <!-- Phía Frontend -->
 # code thuần dùng live server để chạy
-![alt](/kqbai1.png.png)
+![alt](./kqbai1.png)

@@ -38,4 +38,4 @@ CREATE TABLE word_dialog (
   "content": "James: Chào bạn! Bạn có thể chỉ tôi đường đến hồ Hoàn Kiếm không?\nLan: Chào bạn! Bạn đang ở đâu?\nJames: Tôi đang ở phố Tràng Tiền.\nLan: Từ đây, bạn đi thẳng, rẽ phải vào đường Đinh Tiên Hoàng, sẽ thấy hồ.\nJames: Cảm ơn bạn nhiều!\nLan: Không có gì, chúc bạn đi vui!"
 }
 # kết quả 
-![alt text](./endpointB3thu2.png.png)
+![alt text](./endpointB3thu2.png)

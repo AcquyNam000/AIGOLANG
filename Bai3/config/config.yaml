@@ -1,0 +1,8 @@
+server:
+  port: "8080"
+
+database:
+  dsn: "postgres://postgres:your_password@localhost:5432/bai3?sslmode=disable"
+
+groq:
+  api_key: "your_groq_api_key"

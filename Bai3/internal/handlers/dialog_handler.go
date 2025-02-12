@@ -38,3 +38,25 @@ func (h *DialogHandler) ProcessDialog(c *gin.Context) {
 	})
 }
 
+func (h *DialogHandler) ProcessManualDialog(c *gin.Context) {
+	var request struct {
+		Content string `json:"content"`
+	}
+
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+		return
+	}
+
+	dialog, words, err := h.Service.ProcessManualDialog(request.Content)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	// ✅ Trả về JSON đúng format
+	c.JSON(http.StatusOK, gin.H{
+		"dialog": dialog,
+		"words":  words,
+	})
+}

@@ -99,3 +99,71 @@ func (s *DialogService) ProcessDialog(prompt string) (*models.Dialog, []models.W
 	fmt.Println("📌 Hoàn tất xử lý hội thoại ID:", dialogID)
 	return dialog, savedWords, nil
 }
+
+func (s *DialogService) ProcessManualDialog(content string) (*models.Dialog, []models.Word, error) {
+	// 🟢 Lưu hội thoại vào database
+	dialog := &models.Dialog{Lang: "vi", Content: content}
+	dialogID, err := s.DialogRepo.SaveDialog(dialog)
+	if err != nil {
+		return nil, nil, err
+	}
+	dialog.ID = dialogID
+
+	// 🟢 Gọi API trích xuất từ
+	wordsJSON, err := groq.ExtractWords(content)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	// 🟢 Parse JSON trích xuất từ
+	var wordList struct {
+		Words []string `json:"words"`
+	}
+	if err := json.Unmarshal([]byte(wordsJSON), &wordList); err != nil {
+		fmt.Println("🚨 LỖI Parse JSON trích xuất từ:", err)
+		return nil, nil, errors.New("invalid word extraction response")
+	}
+
+	// 🟢 Gọi API dịch từ
+	translatedWordsJSON, err := groq.TranslateWords(wordList.Words)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	// 🟢 Parse JSON dịch từ
+	var translatedWords struct {
+		TranslatedWords []models.Word `json:"translated_words"`
+	}
+	if err := json.Unmarshal([]byte(translatedWordsJSON), &translatedWords); err != nil {
+		fmt.Println("🚨 LỖI Parse JSON dịch từ:", err)
+		return nil, nil, errors.New("invalid translation response")
+	}
+
+	// 🟢 Lưu từ vào database và liên kết với hội thoại
+	savedWords := []models.Word{}
+	for _, word := range translatedWords.TranslatedWords {
+		if word.Content == "" || word.Translate == "" {
+			fmt.Println("🚨 CẢNH BÁO: Từ bị rỗng, bỏ qua:", word)
+			continue
+		}
+
+		word.Lang = "vi"
+		wordID, err := s.WordRepo.SaveWord(&word)
+		if err != nil {
+			return nil, nil, err
+		}
+
+		// ✅ Liên kết từ với hội thoại
+		err = s.WordRepo.LinkWordToDialog(dialogID, wordID)
+		if err != nil {
+			return nil, nil, err
+		}
+
+		// ✅ Thêm vào danh sách từ để trả về
+		word.ID = wordID
+		savedWords = append(savedWords, word)
+	}
+
+	fmt.Println("📌 Hoàn tất xử lý hội thoại ID:", dialogID)
+	return dialog, savedWords, nil
+}

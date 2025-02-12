@@ -13,6 +13,6 @@ func SetupRouter(dialogHandler *handlers.DialogHandler) *gin.Engine {
 	r.SetTrustedProxies([]string{"127.0.0.1", "::1"})
 
 	r.POST("/api/dialog/process", dialogHandler.ProcessDialog)
-
+	r.POST("/api/dialog/manual", dialogHandler.ProcessManualDialog) // 🔹 Thêm API mới
 	return r
 }

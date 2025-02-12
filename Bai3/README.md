@@ -5,7 +5,8 @@ go get github.com/kataras/iris/v12
 go get github.com/lib/pq -->
 go get github.com/gin-gonic/gin
 go get 	"github.com/spf13/viper"
-
+go get github.com/iris-contrib/middleware/cors
+go get github.com/gin-contrib/cors
 # tạo database trong db ten Bai3
 CREATE TABLE dialog (
     id BIGSERIAL PRIMARY KEY,
@@ -39,3 +40,5 @@ CREATE TABLE word_dialog (
 }
 # kết quả 
 ![alt text](./endpointB3thu2.png)
+
+# chạy chương trình go run cmd/main.go

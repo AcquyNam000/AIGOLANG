@@ -2,7 +2,7 @@ server:
   port: "8080"
 
 database:
-  dsn: "postgres://postgres:your_password@localhost:5432/bai3?sslmode=disable"
+  dsn: "postgres://postgres:YOUR_PASSWORD@localhost:5432/YOUR_DB?sslmode=disable"
 
 groq:
-  api_key: "your_groq_api_key"
+  api_key: "YOUR_GROQ_API_KEY"

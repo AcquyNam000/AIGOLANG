@@ -5,7 +5,7 @@
 ![alt](./Bai2/bai2img.png)
 # bài 3 phía BE 
 ![alt](./Bai3/endpointB3.png)
-![alt](./Bai3/endpointB3thu2.pngpng)
+![alt](./Bai3/endpointB3thu2.png)
 # phía FE
 ![alt](./FEBAI3/chatbot-react/FEBekq.png)
 
